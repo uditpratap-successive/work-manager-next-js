@@ -12,11 +12,7 @@ const userSchema= new Schema({
     },
     about:String,
     profileURL:String,
-    // address:{
-    //     street:String,
-    //     city:String,
-    //     cou
-    // }
+    roles:String
 })
 
 export const User=mongoose.models.users || mongoose.model("users",userSchema)

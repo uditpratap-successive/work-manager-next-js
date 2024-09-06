@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import { User } from "../../../models/user";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-
+import { connectDb } from "../../../helper/db";
+connectDb()
 export async function POST(request) {
   console.log("login api");
   const { email, password } = await request.json();
@@ -28,7 +29,7 @@ export async function POST(request) {
     const token = jwt.sign(
       {
         _id: user._id,
-        name: user.name,
+        name: user.name
       },
       process.env.JWT_KEY
     );

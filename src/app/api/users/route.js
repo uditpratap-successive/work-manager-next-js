@@ -27,9 +27,9 @@ export async function GET(request) {
 export async function POST(request) {
   // fetch user detail from  request
 
-  const { name, email, password, about, profileURL } = await request.json();
+  const { name, email, password, about,roles, profileURL } = await request.json();
 
-  console.log({ name, email, password, about, profileURL });
+  console.log({ name, email, password, about,roles, profileURL });
 
   // create user object with user model
 
@@ -38,7 +38,9 @@ export async function POST(request) {
     email,
     password,
     about,
+    roles,
     profileURL,
+   
   });
 
   try {

@@ -4,12 +4,11 @@ import UserContext from "../context/userContext";
 import { logout } from "../services/userService";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useContext } from "react";
 import { toast } from "react-toastify";
-import { useContext } from "react";
+import Cookies from 'js-cookie'; // Import Cookies
 
-
- const CustomNavbar = () => {
+const CustomNavbar = () => {
   const context = useContext(UserContext);
   const router = useRouter();
 
@@ -18,7 +17,8 @@ import { useContext } from "react";
       const result = await logout();
       console.log(result);
       context.setUser(undefined);
-      router.push("/");
+      Cookies.remove('authToken'); // Remove cookie
+      router.push("/login");
     } catch (error) {
       console.log(error);
       toast.error("Logout Error");
@@ -51,13 +51,25 @@ import { useContext } from "react";
                   Show Tasks
                 </Link>
               </li>
+              <li>
+                <Link href={"/tableData"} className="hover:text-blue-200">
+                  UserTable
+                </Link>
+              </li>
+              {context.user.roles === 'admin' && (
+                <li>
+                  <Link href={"/Profile/Admin"} className="hover:text-blue-200">
+                    Admin Panel
+                  </Link>
+                </li>
+              )}
             </>
           )}
         </ul>
       </div>
       <div>
         <ul className="flex space-x-3">
-          {context.user && (
+          {context.user ? (
             <>
               <li>
                 <Link href={"#!"}>{context.user.name}</Link>
@@ -66,9 +78,7 @@ import { useContext } from "react";
                 <button onClick={doLogout}>Logout</button>
               </li>
             </>
-          )}
-
-          {!context.user && (
+          ) : (
             <>
               <li>
                 <Link href="/login">Login</Link>

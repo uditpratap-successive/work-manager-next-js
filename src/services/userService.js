@@ -8,6 +8,14 @@ export async function signUp(user) {
   return result;
 }
 
+//code to get the data of all users
+
+export async function allUsers(){
+  const result=await httpAxios.get("/api/users").then((response)=>response.data)
+return result
+}
+
+
 export async function login(loginData) {
   const result = await httpAxios
     .post("/api/login", loginData)

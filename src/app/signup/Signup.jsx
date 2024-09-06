@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from "react";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 import signUpBanner from "../../assets/singup.svg";
 import Image from "next/image";
 import { toast } from "react-toastify";
@@ -10,9 +12,13 @@ const Signup = () => {
     email: "",
     password: "",
     about: "",
+    roles: "",
     profileURL:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz1K1evWjMTfR3IMBxQxXSGV2pTaO2rAP7EzIMB4u0YwxfFL4pJ269eff6sNvuxtjI7c4s",
   });
+
+  const options = ["user", "admin"];
+  const defaultOption = options[0];
 
   const doSignup = async (event) => {
     event.preventDefault();
@@ -43,6 +49,7 @@ const Signup = () => {
         email: "",
         password: "",
         about: "",
+        roles: "",
         profileURL:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz1K1evWjMTfR3IMBxQxXSGV2pTaO2rAP7EzIMB4u0YwxfFL4pJ269eff6sNvuxtjI7c4s",
       });
@@ -61,6 +68,7 @@ const Signup = () => {
       email: "",
       password: "",
       about: "",
+      roles: "",
       profileURL:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz1K1evWjMTfR3IMBxQxXSGV2pTaO2rAP7EzIMB4u0YwxfFL4pJ269eff6sNvuxtjI7c4s",
     });
@@ -147,7 +155,27 @@ const Signup = () => {
                 }}
                 value={data.password}
               />
+              <div>
+                <label
+                  htmlFor="user_roles"
+                  className="block text-sm font-medium mb-2 ps-2"
+                >
+                  Roles
+                </label>
+                <Dropdown
+                  options={options}
+                  value={defaultOption}
+                  placeholder="Select an option"
+                  onChange={(selectedOption) => {
+                    setData({
+                      ...data,
+                      roles: selectedOption.value, // Correctly access the selected value
+                    });
+                  }}
+                />
+              </div>
             </div>
+
             {/* about section */}
             <div className="mt-3">
               <label

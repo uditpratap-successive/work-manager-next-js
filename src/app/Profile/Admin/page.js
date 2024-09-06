@@ -1,8 +1,7 @@
-const Admin =()=>{
-    return (
-        <div>
- <h1> I am admin</h1>        </div>
-       
+import Admin from "./Admin";
+const Adminpage =()=>{
+    return(
+       <Admin/>
     )
 }
-export default Admin;
+export default Adminpage;

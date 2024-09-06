@@ -57,5 +57,6 @@ export const config = {
     "/show-tasks",
     "/Profile/:path*",
     "/api/:path*",
+    "/Profile/Admin"
   ],
 };

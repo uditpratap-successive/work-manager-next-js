@@ -7,7 +7,7 @@ export async function GET(request, { params }) {
   const { usersid } = params;
 
   try {
-    // get all the task of one user
+   
 
     const tasks = await Task.find({
       userId: usersid,
